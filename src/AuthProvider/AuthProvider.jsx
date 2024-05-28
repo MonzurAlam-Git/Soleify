@@ -49,15 +49,21 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const observerUser = onAuthStateChanged(auth, (user) => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        console.log(user);
+        setLoading(false);
+        console.log("Logged In User :", user.email);
       } else {
-        console.log("no User");
+        setLoading(false);
+        console.log("No user");
       }
     });
-    return () => observerUser();
+
+    // return unSubscribe;
+    return () => {
+      return unSubscribe();
+    };
   }, []);
 
   const authInfo = {

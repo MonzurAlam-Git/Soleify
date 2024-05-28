@@ -41,7 +41,7 @@ const Navbar = () => {
           </ul>
         </div>
         <a href="/" className="btn btn-ghost text-xl">
-          daisyUI
+          Soleify
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -58,6 +58,11 @@ const Navbar = () => {
           <li>
             <a href="/about" className="font-bold">
               About
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard" className="font-bold">
+              Dashboard
             </a>
           </li>
         </ul>

@@ -1,7 +1,6 @@
 import Banner from "./Banner";
 import Diff4Home from "./Diff4Home";
 import FAQ from "./FAQ";
-import Products from "./Products";
 
 import Stat from "./Stat";
 import CountDown from "./CountDown";
@@ -24,7 +23,8 @@ const Home = () => {
       <h1 className="text-5xl text-center font-bold m-5">
         Find Your Dream Cat
       </h1>
-      <div className="grid grid-cols-1 justify-items-center lg:grid-cols-3">
+
+      <div className="grid grid-cols-1 container mx-auto justify-items-center lg:grid-cols-4">
         {fetchdata.map((product) => (
           <Product key={product.id} product={product}></Product>
         ))}

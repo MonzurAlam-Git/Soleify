@@ -1,19 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/UseAuth/useAuth";
 
 import SocialLogin from "./SocialLogin/SocialLogin";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { login } = useAuth();
-  const handleSubmit = (e) => {
+  const { user, login } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location?.state?.from?.pathname || "/";
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    login(email, password);
+    await login(email, password);
     console.log("login with", email, password);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate]);
+
   return (
     <form onSubmit={handleSubmit} className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
