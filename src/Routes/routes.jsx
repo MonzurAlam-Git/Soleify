@@ -10,6 +10,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import AllProducts from "../Components/Dashboard/AllProducts";
 import PrivateRoute from "./PrivateRoute";
+import AddProduct from "../Components/Dashboard/AddProduct";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,16 @@ export const router = createBrowserRouter([
             <AllProducts></AllProducts>
           </PrivateRoute>
         ),
+        loader: () => fetch("http://localhost:3000/shoes"),
+      },
+      {
+        path: "/dashboard/add-products",
+        element: (
+          <PrivateRoute>
+            <AddProduct></AddProduct>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:3000/shoes"),
       },
     ],
   },
