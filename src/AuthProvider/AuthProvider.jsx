@@ -12,35 +12,38 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 
-export const AuthContext = createContext(null);
 const auth = getAuth(app);
+export const AuthContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password);
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   // Google Authentication
   const googleProvider = new GoogleAuthProvider();
   const googleLogin = () => {
-    signInWithPopup(auth, googleProvider);
+    return signInWithPopup(auth, googleProvider);
   };
   // Facebook Login
   const facebookProvider = new FacebookAuthProvider();
   const facebookLogin = () => {
-    signInWithPopup(auth, facebookProvider);
+    return signInWithPopup(auth, facebookProvider);
   };
   // github Login
   const githubProvider = new GithubAuthProvider();
   const githubLogin = () => {
-    signInWithPopup(auth, githubProvider);
+    return signInWithPopup(auth, githubProvider);
   };
 
   const logOut = () => {
@@ -74,6 +77,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     facebookLogin,
     githubLogin,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

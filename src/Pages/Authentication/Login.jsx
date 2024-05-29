@@ -6,10 +6,13 @@ import { useEffect } from "react";
 
 const Login = () => {
   const { user, login } = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const from = location?.state?.from?.pathname || "/";
+  console.log(location);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,6 +21,7 @@ const Login = () => {
     const password = form.password.value;
     await login(email, password);
     console.log("login with", email, password);
+    console.log("location", location);
   };
 
   useEffect(() => {
